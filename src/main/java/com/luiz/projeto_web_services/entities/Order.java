@@ -3,8 +3,6 @@ package com.luiz.projeto_web_services.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
-import org.springframework.boot.servlet.filter.OrderedRequestContextFilter;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luiz.projeto_web_services.entities.enums.OrderStatus;
 
