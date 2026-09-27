@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,9 +27,11 @@ public class Product implements Serializable{
     private Double price;
     private String imgUrl;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "products")
     private Set<Category> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Product(){
     }
@@ -83,6 +86,15 @@ public class Product implements Serializable{
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    @JsonIgnore 
+    public Set<Order> getOrders(){
+        Set<Order> set = new HashSet<>();
+        for(OrderItem x : items){
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override
